@@ -1,20 +1,10 @@
-import { useAppSelector, useAppDispatch } from '~/app/hooks';
-
-import { increment, selectCount } from './counterSlice';
 import { useGetQuestionByParamsQuery } from '~/api/api';
 import { ErrorComponent } from '~/components/ErrorComponent/errorComponent';
 import { LoadingComponent } from '~/components/loadingComponent/loadingComponent';
 
-export function Counter() {
-  const count = useAppSelector(selectCount);
-  const dispatch = useAppDispatch();
-
+export function HomeScreen() {
   const { data, isLoading, isError } = useGetQuestionByParamsQuery({ type: 'boolean', amount: '10' });
   console.log({ data });
-
-  const handleClick = () => {
-    dispatch(increment());
-  };
 
   if (isLoading) {
     return <ErrorComponent />;
@@ -22,5 +12,5 @@ export function Counter() {
   if (isError) {
     return <LoadingComponent />;
   }
-  return <div onClick={handleClick}>{count}</div>;
+  return <div>Home</div>;
 }

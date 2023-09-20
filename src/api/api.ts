@@ -14,7 +14,7 @@ export const quizApi = createApi({
   reducerPath: 'quizApi',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
-    getQuestionByCount: builder.query<AnswerResult, QuestionQueryParams>({
+    getQuestionByParams: builder.query<AnswerResult, QuestionQueryParams>({
       query: (params) => ({
         url: 'api.php',
         params,
@@ -23,4 +23,4 @@ export const quizApi = createApi({
   }),
 });
 
-export const { useGetQuestionByCountQuery } = quizApi;
+export const { useGetQuestionByParamsQuery } = quizApi;
