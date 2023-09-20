@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '~/app/hooks';
 
-import { decrement, increment, selectCount } from './quizSlice';
+import { increment, selectCount } from './quizSlice';
 
 export function quizStep() {
   const count = useAppSelector(selectCount);
