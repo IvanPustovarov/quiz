@@ -3,11 +3,12 @@ import { Button } from '@mui/material';
 import { useStyles } from './styles';
 import { ErrorComponent } from '~/components/ErrorComponent/errorComponent';
 import { LoadingComponent } from '~/components/loadingComponent/loadingComponent';
+import SharedSelect from '../SharedSelect/SharedSelect';
 
 export function HomeScreen() {
   const { data, isLoading, isError } = useGetQuestionByParamsQuery({ type: 'boolean', amount: '10' });
   const { data: category } = useGetCategoryQuery('');
-  console.log(data, category?.trivia_categories);
+  console.log(data?.results, category?.trivia_categories);
 
   const { classes } = useStyles();
 
@@ -27,6 +28,10 @@ export function HomeScreen() {
       <p>Предлагаю насладится тестам из нескольких вариантов ответа на выбранные или случайные темы</p>
       <p>Ниже можно задать параметры</p>
       <p>Если не задать параметры, то вопросы будут созданы по умолчанию</p>
+
+      <SharedSelect options={category?.trivia_categories} />
+
+      <SharedSelect options={data?.results} />
 
       <Button variant="contained" onClick={handleRequest} className={classes.root}>
         Поехали

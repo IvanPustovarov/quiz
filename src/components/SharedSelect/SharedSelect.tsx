@@ -3,8 +3,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { SelectOptions } from './mockSelectData';
 
-export default function SelectSmall() {
+type Props = {
+  options?: SelectOptions[];
+};
+
+export default function SharedSelect({ options }: Props) {
   const [option, setOption] = useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -18,9 +23,11 @@ export default function SelectSmall() {
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {options?.map((item, index) => (
+          <MenuItem value={item.id} key={index}>
+            {item.name ? item.name : item.category}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
