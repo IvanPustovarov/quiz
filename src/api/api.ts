@@ -1,30 +1,26 @@
 import { AnswerResult } from '~/components/QuizStep/quizStep.types';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = 'https://opentdb.com/api.php';
+const BASE_URL = 'https://opentdb.com/';
 
-export const mockQuiz: AnswerResult[] = [
-  {
-    category: 'History',
-    type: 'boolean',
-    difficulty: 'easy',
-    question: 'What you know about rolling down in the deep ?',
-    correct_answer: 'Yes',
-    incorrect_answers: ['No', 'Mabye'],
-  },
-  {
-    category: 'Animals',
-    type: 'boolean',
-    difficulty: 'hard',
-    question: 'What you kn asd aaaaaaaaaa ?',
-    correct_answer: '1',
-    incorrect_answers: ['2', '3'],
-  },
-  {
-    category: 'Entertainment: Board Games',
-    type: 'boolean',
-    difficulty: 'easy',
-    question: 'Which of the following car models has been badge-engineered (rebadged) the most?',
-    correct_answer: 'Isuzu Trooper',
-    incorrect_answers: ['Holden Monaro', 'Suzuki Swift', 'Chevy Camaro'],
-  },
-];
+type QuestionQueryParams = {
+  amount: string;
+  type?: AnswerResult['type'];
+  difficulty?: AnswerResult['difficulty'];
+  category?: AnswerResult['category'];
+};
+
+export const quizApi = createApi({
+  reducerPath: 'quizApi',
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  endpoints: (builder) => ({
+    getQuestionByCount: builder.query<AnswerResult, QuestionQueryParams>({
+      query: (params) => ({
+        url: 'api.php',
+        params,
+      }),
+    }),
+  }),
+});
+
+export const { useGetQuestionByCountQuery } = quizApi;

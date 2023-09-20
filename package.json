@@ -10,7 +10,7 @@
     "clean": "rimraf ./dist",
     "prebuild": "yarn clean",
     "lint": "eslint . --fix --ext .ts,.tsx,.js",
-    "lint:types": "tsc --skipLibCheck --noEmit --project tsconfig.json", 
+    "lint:types": "tsc --skipLibCheck --noEmit --project tsconfig.json",
     "lint-staged": "lint-staged",
     "lint-staged:tsx": "tsc --noEmit && eslint --fix 'src/**/**/*.{js,ts,tsx}'",
     "prettier": "prettier --write src/**/**/*.tsx"
