@@ -34,6 +34,15 @@ export type Category =
   | 'Entertainment: Japanese Anime & Manga'
   | 'Entertainment: Cartoon & Animations';
 
+export interface CategoryAnswer {
+  id: number;
+  name: Category;
+}
+
+export interface CategoryAnswerResult {
+  trivia_categories: CategoryAnswer[];
+}
+
 export interface AnswerResult {
   category: Category;
   type: QuestionType;

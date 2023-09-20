@@ -1,4 +1,4 @@
-import { useGetQuestionByParamsQuery } from '~/api/api';
+import { useGetQuestionByParamsQuery, useGetCategoryQuery } from '~/api/api';
 import { Button } from '@mui/material';
 import { useStyles } from './styles';
 import { ErrorComponent } from '~/components/ErrorComponent/errorComponent';
@@ -6,7 +6,8 @@ import { LoadingComponent } from '~/components/loadingComponent/loadingComponent
 
 export function HomeScreen() {
   const { data, isLoading, isError } = useGetQuestionByParamsQuery({ type: 'boolean', amount: '10' });
-  console.log({ data });
+  const { data: category } = useGetCategoryQuery('');
+  console.log(data, category?.trivia_categories);
 
   const { classes } = useStyles();
 
