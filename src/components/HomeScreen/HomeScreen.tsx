@@ -4,16 +4,28 @@ import { useStyles } from './styles';
 import { ErrorComponent } from '~/components/ErrorComponent/errorComponent';
 import { LoadingComponent } from '~/components/loadingComponent/loadingComponent';
 import SharedSelect from '../SharedSelect/SharedSelect';
+import { difficultySelect } from '../SharedSelect/mockSelectData';
+
+import { useAppDispatch } from '~/app/hooks';
+import { setCategory, setDifficalty } from './filtersSlice';
+
+import { SelectChangeEvent } from '@mui/material/Select';
 
 export function HomeScreen() {
   const { data, isLoading, isError } = useGetQuestionByParamsQuery({ type: 'boolean', amount: '10' });
   const { data: category } = useGetCategoryQuery('');
-  console.log(data?.results, category?.trivia_categories);
 
+  const dispatch = useAppDispatch();
   const { classes } = useStyles();
 
-  const handleRequest = () => {
-    console.log('hererere');
+  const handleRequest = () => {};
+
+  const handleSelectCategory = (option: SelectChangeEvent) => {
+    dispatch(setCategory(option.target.value));
+  };
+
+  const handleSelectDifficalty = (option: SelectChangeEvent) => {
+    dispatch(setDifficalty(option.target.value));
   };
 
   if (isLoading) {
@@ -29,9 +41,9 @@ export function HomeScreen() {
       <p>Ниже можно задать параметры</p>
       <p>Если не задать параметры, то вопросы будут созданы по умолчанию</p>
 
-      <SharedSelect options={category?.trivia_categories} />
+      <SharedSelect handleSelectOption={handleSelectCategory} label="Категория" options={category?.trivia_categories} />
 
-      <SharedSelect options={data?.results} />
+      <SharedSelect handleSelectOption={handleSelectDifficalty} label="Сложность" options={difficultySelect} />
 
       <Button variant="contained" onClick={handleRequest} className={classes.root}>
         Поехали

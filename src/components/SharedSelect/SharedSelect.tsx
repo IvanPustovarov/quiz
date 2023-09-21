@@ -7,25 +7,28 @@ import { SelectOptions } from './mockSelectData';
 
 type Props = {
   options?: SelectOptions[];
+  label: string;
+  handleSelectOption: (event: SelectChangeEvent) => void;
 };
 
-export default function SharedSelect({ options }: Props) {
+export default function SharedSelect({ options, label, handleSelectOption }: Props) {
   const [option, setOption] = useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
-    setOption(event.target.value);
+    setOption(event.target.value as string);
+    handleSelectOption(event);
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small-label">Age</InputLabel>
+    <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+      <InputLabel id="demo-select-small-label">{label}</InputLabel>
       <Select labelId="demo-select-small-label" id="demo-select-small" value={option} label="Option" onChange={handleChange}>
         <MenuItem value="">
-          <em>None</em>
+          <em>Не выбрано</em>
         </MenuItem>
         {options?.map((item, index) => (
-          <MenuItem value={item.id} key={index}>
-            {item.name ? item.name : item.category}
+          <MenuItem value={item.name} key={index}>
+            {item.name}
           </MenuItem>
         ))}
       </Select>
