@@ -1,24 +1,22 @@
-import { useGetQuestionByParamsQuery, useGetCategoryQuery } from '~/api/api';
-import { Button } from '@mui/material';
+import { useGetCategoryQuery } from '~/api/api';
+import { useAppSelector, useAppDispatch } from '~/app/hooks';
+
+import { Button, Slider, Box } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { useStyles } from './styles';
-import { ErrorComponent } from '~/components/ErrorComponent/errorComponent';
-import { LoadingComponent } from '~/components/loadingComponent/loadingComponent';
+
 import SharedSelect from '../SharedSelect/SharedSelect';
 import { difficultySelect } from '../SharedSelect/mockSelectData';
 
-import { useAppDispatch } from '~/app/hooks';
-import { setCategory, setDifficalty } from './filtersSlice';
-
-import { SelectChangeEvent } from '@mui/material/Select';
+import { setCategory, setDifficalty, setQuestionCount, filterStore } from './filtersSlice';
 
 export function HomeScreen() {
-  const { data, isLoading, isError } = useGetQuestionByParamsQuery({ type: 'boolean', amount: '10' });
-  const { data: category } = useGetCategoryQuery('');
+  const categoryResult = useGetCategoryQuery('');
 
+  const filter = useAppSelector(filterStore);
   const dispatch = useAppDispatch();
-  const { classes } = useStyles();
 
-  const handleRequest = () => {};
+  const { classes } = useStyles();
 
   const handleSelectCategory = (option: SelectChangeEvent) => {
     dispatch(setCategory(option.target.value));
@@ -28,12 +26,15 @@ export function HomeScreen() {
     dispatch(setDifficalty(option.target.value));
   };
 
-  if (isLoading) {
-    return <ErrorComponent />;
-  }
-  if (isError) {
-    return <LoadingComponent />;
-  }
+  // 'any' because 'Event' doesnt work
+  const handleChangeCountQuestion = (event: any) => {
+    dispatch(setQuestionCount(event.target.value));
+  };
+
+  const handleRequestQuestion = () => {
+    console.log('go');
+  };
+
   return (
     <div className="home-container">
       <h1>Здравствуй!</h1>
@@ -41,13 +42,26 @@ export function HomeScreen() {
       <p>Ниже можно задать параметры</p>
       <p>Если не задать параметры, то вопросы будут созданы по умолчанию</p>
 
-      <SharedSelect handleSelectOption={handleSelectCategory} label="Категория" options={category?.trivia_categories} />
-
+      <SharedSelect handleSelectOption={handleSelectCategory} label="Категория" options={categoryResult.data?.trivia_categories} />
       <SharedSelect handleSelectOption={handleSelectDifficalty} label="Сложность" options={difficultySelect} />
 
-      <Button variant="contained" onClick={handleRequest} className={classes.root}>
+      <Box sx={{ width: 300 }}>
+        <Slider
+          size="small"
+          defaultValue={10}
+          aria-label="Small"
+          max={50}
+          min={1}
+          valueLabelDisplay="auto"
+          onChange={handleChangeCountQuestion}
+        />
+      </Box>
+
+      <Button variant="contained" onClick={handleRequestQuestion} className={classes.root}>
         Поехали
       </Button>
+
+      <div>{filter.questionCount}</div>
     </div>
   );
 }

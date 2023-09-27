@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const BASE_URL = 'https://opentdb.com/';
 
-type QuestionQueryParams = {
+export type QuestionQueryParams = {
   amount: string;
   type?: AnswerResult['type'];
   difficulty?: AnswerResult['difficulty'];
@@ -21,9 +21,7 @@ export const quizApi = createApi({
       }),
     }),
     getCategory: builder.query<CategoryAnswerResult, ''>({
-      query: () => ({
-        url: 'api_category.php',
-      }),
+      query: () => 'api_category.php',
     }),
   }),
 });
