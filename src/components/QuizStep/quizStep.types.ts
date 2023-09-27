@@ -1,6 +1,24 @@
-export interface Root {
+export interface QuizRootAnswer {
   response_code: number;
   results: AnswerResult[];
+}
+
+export interface CategoryAnswer {
+  id: number;
+  name: Category;
+}
+
+export interface CategoryAnswerResult {
+  trivia_categories: CategoryAnswer[];
+}
+
+export interface AnswerResult {
+  category: Category;
+  type: QuestionType;
+  difficulty: QuestionDifficulty;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
 }
 
 export type QuestionType = 'boolean' | 'multiple';
@@ -33,21 +51,3 @@ export type Category =
   | 'Science: Gadgets'
   | 'Entertainment: Japanese Anime & Manga'
   | 'Entertainment: Cartoon & Animations';
-
-export interface CategoryAnswer {
-  id: number;
-  name: Category;
-}
-
-export interface CategoryAnswerResult {
-  trivia_categories: CategoryAnswer[];
-}
-
-export interface AnswerResult {
-  category: Category;
-  type: QuestionType;
-  difficulty: QuestionDifficulty;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}

@@ -1,14 +1,9 @@
-import { useAppSelector, useAppDispatch } from '~/app/hooks';
+import { AnswerResult } from './quizStep.types';
 
-import { increment, selectCount } from './quizSlice';
+type Props = {
+  quiz: AnswerResult;
+};
 
-export function quizStep() {
-  const count = useAppSelector(selectCount);
-  const dispatch = useAppDispatch();
-
-  const handleClick = () => {
-    dispatch(increment());
-  };
-
-  return <div onClick={handleClick}>{count}</div>;
+export function QuizStep({ quiz }: Props) {
+  return <div>{quiz.correct_answer}</div>;
 }

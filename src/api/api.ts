@@ -1,4 +1,4 @@
-import { AnswerResult, CategoryAnswerResult, Root } from '~/components/QuizStep/quizStep.types';
+import { AnswerResult, CategoryAnswerResult, QuizRootAnswer } from '~/components/QuizStep/quizStep.types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const BASE_URL = 'https://opentdb.com/';
@@ -14,7 +14,7 @@ export const quizApi = createApi({
   reducerPath: 'quizApi',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
-    getQuestionByParams: builder.query<Root, QuestionQueryParams>({
+    getQuestionByParams: builder.query<QuizRootAnswer, QuestionQueryParams>({
       query: (params) => ({
         url: 'api.php',
         params,

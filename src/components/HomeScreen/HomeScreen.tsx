@@ -1,5 +1,5 @@
 import { useGetCategoryQuery } from '~/api/api';
-import { useAppSelector, useAppDispatch } from '~/app/hooks';
+import { useAppDispatch } from '~/app/hooks';
 
 import { Button, Slider, Box } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
@@ -8,12 +8,10 @@ import { useStyles } from './styles';
 import SharedSelect from '../SharedSelect/SharedSelect';
 import { difficultySelect } from '../SharedSelect/mockSelectData';
 
-import { setCategory, setDifficalty, setQuestionCount, filterStore } from './filtersSlice';
+import { setCategory, setDifficalty, setQuestionCount, setScreenShowed } from './homescreenSlice';
 
 export function HomeScreen() {
   const categoryResult = useGetCategoryQuery('');
-
-  const filter = useAppSelector(filterStore);
   const dispatch = useAppDispatch();
 
   const { classes } = useStyles();
@@ -28,11 +26,11 @@ export function HomeScreen() {
 
   // 'any' because 'Event' doesnt work
   const handleChangeCountQuestion = (event: any) => {
-    dispatch(setQuestionCount(event.target.value));
+    dispatch(setQuestionCount(event.target?.value));
   };
 
   const handleRequestQuestion = () => {
-    console.log('go');
+    dispatch(setScreenShowed(false));
   };
 
   return (
@@ -60,8 +58,6 @@ export function HomeScreen() {
       <Button variant="contained" onClick={handleRequestQuestion} className={classes.root}>
         Поехали
       </Button>
-
-      <div>{filter.questionCount}</div>
     </div>
   );
 }
