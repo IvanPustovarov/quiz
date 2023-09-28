@@ -5,7 +5,7 @@ import { AnswerResult, CategoryAnswer } from '../QuizStep/quizStep.types';
 
 interface filtersState {
   questionCount: number;
-  category: AnswerResult['category'];
+  category: string;
   difficalty: AnswerResult['difficulty'];
   // questions: AnswerResult[];
   categories: CategoryAnswer[];
@@ -26,10 +26,11 @@ export const homescreenSlice = createSlice({
   initialState,
   reducers: {
     setDifficalty: (state, action: PayloadAction<AnswerResult['difficulty']>) => {
+      console.log('in reduser/////', action.payload);
       state.difficalty = action.payload;
     },
-    setCategory: (state, action: PayloadAction<AnswerResult['category']>) => {
-      state.category = action.payload;
+    setCategory: (state, action: PayloadAction<number>) => {
+      state.category = action.payload.toString();
     },
     // setQuestionArray: (state, action: PayloadAction<AnswerResult[]>) => {
     //   for (let index = 0; index < action.payload.length; index++) {

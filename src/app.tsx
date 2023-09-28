@@ -15,7 +15,7 @@ const App = () => {
       })}
     >
       {homeStore.isScreenShowed ? <HomeScreen /> : null}
-      <StepContainer />
+      {homeStore.isScreenShowed ? null : <StepContainer />}
     </div>
   );
 };

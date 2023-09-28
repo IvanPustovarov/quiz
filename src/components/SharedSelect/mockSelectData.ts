@@ -1,6 +1,6 @@
 import { Category, QuestionDifficulty } from '../QuizStep/quizStep.types';
 
-type QuestionDifficultyRus = 'легко' | 'средне' | 'тяжело';
+export type QuestionDifficultyRus = 'легко' | 'средне' | 'тяжело';
 
 export const rusDifficulties: Record<QuestionDifficulty, QuestionDifficultyRus> = {
   easy: 'легко',
@@ -13,22 +13,33 @@ export interface SelectOptions {
   name: Category | (typeof rusDifficulties)[keyof typeof rusDifficulties];
 }
 
+export interface SelectCategoryOption {
+  id: number;
+  name: string;
+}
+
+export type SelectUnionOption = Pick<difficultyType, 'rusName' | 'id' | 'name'>;
+
 interface difficultyType {
   id: number;
-  name: (typeof rusDifficulties)[keyof typeof rusDifficulties];
+  name: QuestionDifficulty;
+  rusName: (typeof rusDifficulties)[keyof typeof rusDifficulties];
 }
 
 export const difficultySelect: difficultyType[] = [
   {
     id: 1,
-    name: 'легко',
+    name: 'easy',
+    rusName: 'легко',
   },
   {
     id: 2,
-    name: 'средне',
+    name: 'medium',
+    rusName: 'средне',
   },
   {
     id: 3,
-    name: 'тяжело',
+    name: 'hard',
+    rusName: 'тяжело',
   },
 ];

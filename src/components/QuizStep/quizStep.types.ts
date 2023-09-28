@@ -5,7 +5,7 @@ export interface QuizRootAnswer {
 
 export interface CategoryAnswer {
   id: number;
-  name: Category;
+  name: string;
 }
 
 export interface CategoryAnswerResult {

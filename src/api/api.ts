@@ -7,7 +7,7 @@ export type QuestionQueryParams = {
   amount: string;
   type?: AnswerResult['type'];
   difficulty?: AnswerResult['difficulty'];
-  category?: AnswerResult['category'];
+  category?: string;
 };
 
 export const quizApi = createApi({

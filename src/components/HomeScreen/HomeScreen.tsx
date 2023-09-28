@@ -17,11 +17,15 @@ export function HomeScreen() {
   const { classes } = useStyles();
 
   const handleSelectCategory = (option: SelectChangeEvent) => {
-    dispatch(setCategory(option.target.value));
+    const findIdCategory = categoryResult.data?.trivia_categories.find((item) => item.name === option.target.value);
+    if (findIdCategory?.id) dispatch(setCategory(findIdCategory.id));
   };
 
+  const difficaltySelectRus = difficultySelect.map(({ rusName }) => ({ name: rusName }));
+
   const handleSelectDifficalty = (option: SelectChangeEvent) => {
-    dispatch(setDifficalty(option.target.value));
+    const findNameDifficalty = difficultySelect.find((item) => item.rusName === option.target.value);
+    if (findNameDifficalty?.name) dispatch(setDifficalty(findNameDifficalty.name));
   };
 
   // 'any' because 'Event' doesnt work
@@ -41,7 +45,7 @@ export function HomeScreen() {
       <p>Если не задать параметры, то вопросы будут созданы по умолчанию</p>
 
       <SharedSelect handleSelectOption={handleSelectCategory} label="Категория" options={categoryResult.data?.trivia_categories} />
-      <SharedSelect handleSelectOption={handleSelectDifficalty} label="Сложность" options={difficultySelect} />
+      <SharedSelect handleSelectOption={handleSelectDifficalty} label="Сложность" options={difficaltySelectRus} />
 
       <Box sx={{ width: 300 }}>
         <Slider

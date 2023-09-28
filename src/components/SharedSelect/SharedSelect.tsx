@@ -3,10 +3,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { SelectOptions } from './mockSelectData';
+import { QuestionDifficultyRus, SelectCategoryOption, SelectUnionOption } from './mockSelectData';
 
 type Props = {
-  options?: SelectOptions[];
+  options?: SelectUnionOption[] | SelectCategoryOption[] | { name: QuestionDifficultyRus }[];
   label: string;
   handleSelectOption: (event: SelectChangeEvent) => void;
 };

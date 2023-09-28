@@ -36,9 +36,14 @@ export function StepContainer() {
     category: homeStore.category,
   });
 
+  console.log(data?.results);
+
+  if (data?.results.length === 0) {
+    return <div>try again</div>;
+  }
   return (
     <div>
-      {mockArray.results.map((quiz, index) => (
+      {data?.results.map((quiz, index) => (
         <QuizStep key={index} quiz={quiz} />
       ))}
       <Button>Ответить</Button>
