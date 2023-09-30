@@ -1,5 +1,6 @@
 import { useGetCategoryQuery } from '~/api/api';
-import { useAppDispatch } from '~/app/hooks';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import { homescreenStore } from '~/components/HomeScreen/homescreenSlice';
 
 import { Button, Slider, Box } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
@@ -13,6 +14,7 @@ import { setCategory, setDifficalty, setQuestionCount, setScreenShowed } from '.
 export function HomeScreen() {
   const categoryResult = useGetCategoryQuery('');
   const dispatch = useAppDispatch();
+  const homeStore = useAppSelector(homescreenStore);
 
   const { classes } = useStyles();
 
@@ -37,6 +39,11 @@ export function HomeScreen() {
     dispatch(setScreenShowed(false));
   };
 
+  const isButtonAvaliable = () => {
+    if (homeStore.category && homeStore.difficalty && homeStore.questionCount) return false;
+    else return true;
+  };
+
   return (
     <div className="home-container">
       <h1>Здравствуй!</h1>
@@ -50,16 +57,16 @@ export function HomeScreen() {
       <Box sx={{ width: 300 }}>
         <Slider
           size="small"
-          defaultValue={10}
+          defaultValue={0}
           aria-label="Small"
           max={50}
-          min={1}
+          min={0}
           valueLabelDisplay="auto"
           onChange={handleChangeCountQuestion}
         />
       </Box>
 
-      <Button variant="contained" onClick={handleRequestQuestion} className={classes.root}>
+      <Button variant="contained" disabled={isButtonAvaliable()} onClick={handleRequestQuestion} className={classes.root}>
         Поехали
       </Button>
     </div>

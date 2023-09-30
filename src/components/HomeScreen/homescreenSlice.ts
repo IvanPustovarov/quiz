@@ -4,18 +4,18 @@ import type { RootState } from '~/app/store';
 import { AnswerResult, CategoryAnswer } from '../QuizStep/quizStep.types';
 
 interface filtersState {
-  questionCount: number;
-  category: string;
-  difficalty: AnswerResult['difficulty'];
+  questionCount?: number;
+  category?: string;
+  difficalty?: AnswerResult['difficulty'];
   // questions: AnswerResult[];
   categories: CategoryAnswer[];
   isScreenShowed: boolean;
 }
 
 const initialState: filtersState = {
-  questionCount: 1,
-  category: 'Entertainment: Film',
-  difficalty: 'easy',
+  questionCount: undefined,
+  category: undefined,
+  difficalty: undefined,
   // questions: [],
   categories: [],
   isScreenShowed: true,
@@ -26,7 +26,6 @@ export const homescreenSlice = createSlice({
   initialState,
   reducers: {
     setDifficalty: (state, action: PayloadAction<AnswerResult['difficulty']>) => {
-      console.log('in reduser/////', action.payload);
       state.difficalty = action.payload;
     },
     setCategory: (state, action: PayloadAction<number>) => {
