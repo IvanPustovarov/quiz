@@ -1,10 +1,11 @@
-import { Button } from '@mui/material';
 import { QuizStep } from '../QuizStep/quizStep';
 import { useGetQuestionByParamsQuery } from '~/api/api';
+import { useStyles } from './styles';
 import { useAppSelector } from '~/app/hooks';
 import { homescreenStore } from '../HomeScreen/homescreenSlice';
 
 export function StepContainer() {
+  const { classes } = useStyles();
   const homeStore = useAppSelector(homescreenStore);
   const { data, isLoading, isFetching } = useGetQuestionByParamsQuery({
     type: 'boolean',
@@ -19,11 +20,10 @@ export function StepContainer() {
     return <div>Похоже, что вопросы не загрузились</div>;
   }
   return (
-    <div>
+    <div className={classes.root}>
       {data?.results.map((quiz, index) => (
         <QuizStep key={index} quiz={quiz} />
       ))}
-      <Button>Ответить</Button>
     </div>
   );
 }
