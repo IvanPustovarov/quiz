@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const BASE_URL = 'https://opentdb.com/';
 
 export type QuestionQueryParams = {
-  amount: string;
+  amount?: string;
   type?: AnswerResult['type'];
   difficulty?: AnswerResult['difficulty'];
   category?: string;
