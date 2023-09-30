@@ -1,4 +1,4 @@
-import { Category, QuestionDifficulty } from '../QuizStep/quizStep.types';
+import { QuestionDifficulty } from '../QuizStep/quizStep.types';
 
 export type QuestionDifficultyRus = 'легко' | 'средне' | 'тяжело';
 
@@ -10,23 +10,18 @@ export const rusDifficulties: Record<QuestionDifficulty, QuestionDifficultyRus> 
 
 export interface SelectOptions {
   id: number;
-  name: Category | (typeof rusDifficulties)[keyof typeof rusDifficulties];
-}
-
-export interface SelectCategoryOption {
-  id: number;
   name: string;
 }
 
-export type SelectUnionOption = Pick<difficultyType, 'rusName' | 'id' | 'name'>;
+export type SelectUnionOption = Pick<DifficultyType, 'rusName' | 'id' | 'name'>;
 
-interface difficultyType {
+interface DifficultyType {
   id: number;
   name: QuestionDifficulty;
-  rusName: (typeof rusDifficulties)[keyof typeof rusDifficulties];
+  rusName: string;
 }
 
-export const difficultySelect: difficultyType[] = [
+export const difficultySelect: DifficultyType[] = [
   {
     id: 1,
     name: 'easy',

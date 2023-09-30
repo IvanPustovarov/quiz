@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { homescreenStore } from '~/components/HomeScreen/homescreenSlice';
 
 import { Button, Slider, Box } from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select';
 import { useStyles } from './styles';
 
 import SharedSelect from '../SharedSelect/SharedSelect';
-import { difficultySelect } from '../SharedSelect/mockSelectData';
+import { SelectOptions, SelectUnionOption, difficultySelect } from '../SharedSelect/mockSelectData';
 
 import { setCategory, setDifficalty, setQuestionCount, setScreenShowed } from './homescreenSlice';
+
+export type Option = SelectUnionOption | SelectOptions;
 
 export function HomeScreen() {
   const categoryResult = useGetCategoryQuery('');
@@ -18,21 +19,23 @@ export function HomeScreen() {
 
   const { classes } = useStyles();
 
-  const handleSelectCategory = (option: SelectChangeEvent) => {
-    const findIdCategory = categoryResult.data?.trivia_categories.find((item) => item.name === option.target.value);
+  const handleSelectCategory = (option: Option) => {
+    const findIdCategory = categoryResult.data?.trivia_categories.find((item) => item.name === option.name);
     if (findIdCategory?.id) dispatch(setCategory(findIdCategory.id));
   };
 
-  const difficaltySelectRus = difficultySelect.map(({ rusName }) => ({ name: rusName }));
+  const difficaltySelectRus = difficultySelect.map(({ rusName, id }) => ({ name: rusName, id }));
 
-  const handleSelectDifficalty = (option: SelectChangeEvent) => {
-    const findNameDifficalty = difficultySelect.find((item) => item.rusName === option.target.value);
+  const handleSelectDifficalty = (option: Option) => {
+    const findNameDifficalty = difficultySelect.find((item) => item.rusName === option.name);
     if (findNameDifficalty?.name) dispatch(setDifficalty(findNameDifficalty.name));
   };
 
-  // 'any' because 'Event' doesnt work
-  const handleChangeCountQuestion = (event: any) => {
-    dispatch(setQuestionCount(event.target?.value));
+  const handleChangeCountQuestion = (event: Event) => {
+    const { target } = event;
+    if (target && 'value' in target && typeof target.value === 'number') {
+      dispatch(setQuestionCount(target.value));
+    }
   };
 
   const handleRequestQuestion = () => {

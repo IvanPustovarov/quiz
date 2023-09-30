@@ -2,33 +2,33 @@ import { useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { QuestionDifficultyRus, SelectCategoryOption, SelectUnionOption } from './mockSelectData';
+import Select from '@mui/material/Select';
+import { SelectUnionOption } from './mockSelectData';
+import { Option } from '../HomeScreen/HomeScreen';
 
 type Props = {
-  options?: SelectUnionOption[] | SelectCategoryOption[] | { name: QuestionDifficultyRus }[];
+  options?: Option[];
   label: string;
-  handleSelectOption: (event: SelectChangeEvent) => void;
+  handleSelectOption: (option: Option) => void;
 };
 
-export default function SharedSelect({ options, label, handleSelectOption }: Props) {
-  const [option, setOption] = useState('');
+const isSelectWithRus = (value: Option): value is SelectUnionOption => 'rusName' in value;
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setOption(event.target.value as string);
-    handleSelectOption(event);
+export default function SharedSelect({ options, label, handleSelectOption }: Props) {
+  const [option, setOption] = useState<Option | null>(null);
+
+  const handleChange = (option: Option) => {
+    setOption(option);
+    handleSelectOption(option);
   };
 
   return (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
       <InputLabel id="demo-select-small-label">{label}</InputLabel>
-      <Select labelId="demo-select-small-label" id="demo-select-small" value={option} label="Option" onChange={handleChange}>
-        <MenuItem value="">
-          <em>Не выбрано</em>
-        </MenuItem>
-        {options?.map((item, index) => (
-          <MenuItem value={item.name} key={index}>
-            {item.name}
+      <Select labelId="demo-select-small-label" id="demo-select-small" value={option?.name || ''} label={label}>
+        {options?.map((option, index) => (
+          <MenuItem value={option.name} onClick={() => handleChange(option)} key={index}>
+            {isSelectWithRus(option) ? option.rusName : option.name}
           </MenuItem>
         ))}
       </Select>

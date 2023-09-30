@@ -14,8 +14,7 @@ const App = () => {
         [classes.active]: isActive,
       })}
     >
-      {homeStore.isScreenShowed ? <HomeScreen /> : null}
-      {homeStore.isScreenShowed ? null : <StepContainer />}
+      {homeStore.isScreenShowed ? <HomeScreen /> : <StepContainer />}
     </div>
   );
 };

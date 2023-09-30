@@ -13,7 +13,7 @@ export interface CategoryAnswerResult {
 }
 
 export interface AnswerResult {
-  category: Category;
+  category: string;
   type: QuestionType;
   difficulty: QuestionDifficulty;
   question: string;
@@ -24,30 +24,3 @@ export interface AnswerResult {
 export type QuestionType = 'boolean' | 'multiple';
 
 export type QuestionDifficulty = 'easy' | 'medium' | 'hard';
-
-export type Category =
-  | 'Entertainment: Film'
-  | 'Entertainment: Comics'
-  | 'General Knowledge'
-  | 'Entertainment: Books'
-  | 'Entertainment: Music'
-  | 'Entertainment: Musicals & Theatres'
-  | 'Entertainment: Television'
-  | 'Entertainment: Video Games'
-  | 'Entertainment: Board Games'
-  | 'Science & Nature'
-  | 'Science: Computers'
-  | 'Science: Mathematics'
-  | 'Mythology'
-  | 'Sports'
-  | 'Geography'
-  | 'History'
-  | 'Politics'
-  | 'Art'
-  | 'Celebrities'
-  | 'Animals'
-  | 'Vehicles'
-  | 'Entertainment: Comics'
-  | 'Science: Gadgets'
-  | 'Entertainment: Japanese Anime & Manga'
-  | 'Entertainment: Cartoon & Animations';
