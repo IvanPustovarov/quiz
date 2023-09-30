@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function QuizStep({ quiz }: Props) {
-  const createOneArrayOfQestion = () => {
+  const createOneArrayOfQuestion = () => {
     const arrayAnswer = [...quiz.incorrect_answers, quiz.correct_answer];
     const shuffledArray = arrayAnswer.sort(() => 0.5 - Math.random());
     return shuffledArray;
@@ -21,7 +21,7 @@ export function QuizStep({ quiz }: Props) {
       <FormControl>
         <FormLabel id="radio-buttons-group-label">{quiz.question}</FormLabel>
         <RadioGroup aria-labelledby="radio-buttons-group-label" defaultValue="female" name="radio-buttons-group">
-          {createOneArrayOfQestion().map((item, index) => (
+          {createOneArrayOfQuestion().map((item, index) => (
             <FormControlLabel value={item} control={<Radio />} key={index} label={item} />
           ))}
         </RadioGroup>
