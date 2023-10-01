@@ -39,6 +39,13 @@ export function QuizStep({ quiz, questionIndex }: Props) {
     dispatch(setIncrementQuestionStep(questionIndex + 1));
   };
 
+  const returnButtonNextText = () => {
+    if (homeStore.questionCount && questionIndex + 1 > homeStore.questionCount - 1) {
+      return 'Завершить';
+    }
+    return 'Ответить';
+  };
+
   return (
     <Card sx={{ minWidth: 275, maxWidth: 500 }}>
       <CardContent>
@@ -58,7 +65,7 @@ export function QuizStep({ quiz, questionIndex }: Props) {
         </FormControl>
       </CardContent>
       <CardActions>
-        <Button onClick={handleSetupResponse}>Ответить</Button>
+        <Button onClick={handleSetupResponse}>{returnButtonNextText()}</Button>
       </CardActions>
     </Card>
   );

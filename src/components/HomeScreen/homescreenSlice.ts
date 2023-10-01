@@ -33,6 +33,12 @@ export const homescreenSlice = createSlice({
     setCategory: (state, action: PayloadAction<number>) => {
       state.category = action.payload.toString();
     },
+    setResetQuestionsParams: (state) => {
+      state.category = '';
+      state.isScreenShowed = true;
+      state.difficalty = '';
+      state.questionCount = 0;
+    },
     // setQuestionArray: (state, action: PayloadAction<AnswerResult[]>) => {
     //   for (let index = 0; index < action.payload.length; index++) {
     //     const element = action.payload[index];
@@ -51,6 +57,7 @@ export const homescreenSlice = createSlice({
   },
 });
 
-export const { setCategory, setDifficalty, setQuestionCount, setScreenShowed, setIncrementQuestionStep } = homescreenSlice.actions;
+export const { setCategory, setDifficalty, setQuestionCount, setScreenShowed, setIncrementQuestionStep, setResetQuestionsParams } =
+  homescreenSlice.actions;
 
 export const homescreenStore = (state: RootState) => state.homescreen;
