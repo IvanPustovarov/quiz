@@ -10,7 +10,7 @@ import FormLabel from '@mui/material/FormLabel';
 import decodeHTML from '~/utils/decoderHTML';
 import { Button } from '@mui/material';
 
-import { homescreenStore, setIncrementQuestionStep } from '../HomeScreen/homescreenSlice';
+import { homescreenStore, setIncrementQuestionStep, setScreenShowed } from '../HomeScreen/homescreenSlice';
 import { useAppSelector, useAppDispatch } from '~/app/hooks';
 
 type Props = {
@@ -37,6 +37,10 @@ export function QuizStep({ quiz, questionIndex }: Props) {
 
   const handleSetupResponse = () => {
     dispatch(setIncrementQuestionStep(questionIndex + 1));
+
+    if (homeStore.questionCount && homeStore.userStep === homeStore.questionCount - 1) {
+      dispatch(setScreenShowed('finish'));
+    }
   };
 
   const returnButtonNextText = () => {

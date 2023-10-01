@@ -39,7 +39,7 @@ export function HomeScreen() {
   };
 
   const handleRequestQuestion = () => {
-    dispatch(setScreenShowed(false));
+    dispatch(setScreenShowed('process'));
   };
 
   const isButtonAvaliable = () => {

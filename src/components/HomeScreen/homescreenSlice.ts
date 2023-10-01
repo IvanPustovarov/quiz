@@ -9,9 +9,11 @@ interface filtersState {
   difficalty?: AnswerResult['difficulty'] | '';
   // questions: AnswerResult[];
   categories: CategoryAnswer[];
-  isScreenShowed: boolean;
+  isScreenShowed: ScreenState;
   userStep: number;
 }
+
+type ScreenState = 'start' | 'process' | 'finish';
 
 const initialState: filtersState = {
   questionCount: undefined,
@@ -19,7 +21,7 @@ const initialState: filtersState = {
   difficalty: '',
   // questions: [],
   categories: [],
-  isScreenShowed: true,
+  isScreenShowed: 'start',
   userStep: 0,
 };
 
@@ -35,7 +37,7 @@ export const homescreenSlice = createSlice({
     },
     setResetQuestionsParams: (state) => {
       state.category = '';
-      state.isScreenShowed = true;
+      state.isScreenShowed = 'start';
       state.difficalty = '';
       state.questionCount = 0;
     },
@@ -48,7 +50,7 @@ export const homescreenSlice = createSlice({
     setQuestionCount: (state, action: PayloadAction<number>) => {
       state.questionCount = action.payload;
     },
-    setScreenShowed: (state, action: PayloadAction<boolean>) => {
+    setScreenShowed: (state, action: PayloadAction<ScreenState>) => {
       state.isScreenShowed = action.payload;
     },
     setIncrementQuestionStep: (state, action: PayloadAction<number>) => {

@@ -3,6 +3,7 @@ import { HomeScreen } from './components/HomeScreen/HomeScreen';
 import { StepContainer } from './components/StepContainer/StepContainer';
 import { useAppSelector } from '~/app/hooks';
 import { homescreenStore } from './components/HomeScreen/homescreenSlice';
+import { FinishScreen } from './components/FinishScreen/FinishScreen';
 
 const App = () => {
   const { classes, cx } = useStyles();
@@ -14,7 +15,13 @@ const App = () => {
         [classes.active]: isActive,
       })}
     >
-      {homeStore.isScreenShowed ? <HomeScreen /> : <StepContainer />}
+      {homeStore.isScreenShowed === 'start' ? (
+        <HomeScreen />
+      ) : homeStore.isScreenShowed === 'process' ? (
+        <StepContainer />
+      ) : homeStore.isScreenShowed === 'finish' ? (
+        <FinishScreen />
+      ) : null}
     </div>
   );
 };
