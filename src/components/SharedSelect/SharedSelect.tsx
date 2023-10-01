@@ -24,8 +24,8 @@ export default function SharedSelect({ options, label, handleSelectOption }: Pro
 
   return (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-      <InputLabel id="demo-select-small-label">{label}</InputLabel>
-      <Select labelId="demo-select-small-label" id="demo-select-small" value={option?.name || ''} label={label}>
+      <InputLabel id="select-small-label">{label}</InputLabel>
+      <Select labelId="select-small-label" id="select-small" value={option?.name || ''} label={label}>
         {options?.map((option, index) => (
           <MenuItem value={option.name} onClick={() => handleChange(option)} key={index}>
             {isSelectWithRus(option) ? option.rusName : option.name}

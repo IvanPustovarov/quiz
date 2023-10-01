@@ -21,14 +21,24 @@ export function QuizStep({ quiz }: Props) {
     return shuffledArray;
   };
 
+  const handleSetAnser = (answer: string) => {
+    console.log(answer);
+  };
+
   return (
     <Card sx={{ minWidth: 275, maxWidth: 500 }}>
       <CardContent>
         <FormControl>
           <FormLabel id="radio-buttons-group-label">{decodeHTML(quiz.question)}</FormLabel>
           <RadioGroup aria-labelledby="radio-buttons-group-label" defaultValue="female" name="radio-buttons-group">
-            {createOneArrayOfQuestion().map((item, index) => (
-              <FormControlLabel value={item} control={<Radio />} key={index} label={item} />
+            {createOneArrayOfQuestion().map((question, index) => (
+              <FormControlLabel
+                value={question}
+                control={<Radio />}
+                key={index}
+                onClick={() => handleSetAnser(question)}
+                label={decodeHTML(question)}
+              />
             ))}
           </RadioGroup>
         </FormControl>

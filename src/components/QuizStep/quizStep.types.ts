@@ -15,7 +15,7 @@ export interface CategoryAnswerResult {
 export interface AnswerResult {
   category: string;
   type: QuestionType;
-  difficulty: QuestionDifficulty;
+  difficulty: QuestionDifficulty | '';
   question: string;
   correct_answer: string;
   incorrect_answers: string[];
