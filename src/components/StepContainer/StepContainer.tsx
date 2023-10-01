@@ -24,6 +24,11 @@ export function StepContainer() {
     dispatch(setQuestionCount(0));
   };
 
+  const QuestionToRender = () => {
+    const question = data?.results[homeStore.userStep];
+    return question;
+  };
+
   if (isLoading) {
     return <LoadingComponent></LoadingComponent>;
   }
@@ -36,10 +41,12 @@ export function StepContainer() {
     );
   }
   return (
-    <div className={classes.root}>
-      {data?.results.map((quiz, index) => (
-        <QuizStep key={index} quiz={quiz} />
-      ))}
-    </div>
+    <>
+      {QuestionToRender() ? (
+        <div className={classes.root}>
+          {<QuizStep questionIndex={homeStore.userStep} key={QuestionToRender()?.correct_answer} quiz={QuestionToRender()} />}
+        </div>
+      ) : null}
+    </>
   );
 }

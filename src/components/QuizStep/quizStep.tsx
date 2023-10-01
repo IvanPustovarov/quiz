@@ -10,33 +10,47 @@ import FormLabel from '@mui/material/FormLabel';
 import decodeHTML from '~/utils/decoderHTML';
 import { Button } from '@mui/material';
 
+import { homescreenStore, setIncrementQuestionStep } from '../HomeScreen/homescreenSlice';
+import { useAppSelector, useAppDispatch } from '~/app/hooks';
+
 type Props = {
-  quiz: AnswerResult;
+  quiz?: AnswerResult;
+  questionIndex: number;
 };
 
-export function QuizStep({ quiz }: Props) {
+export function QuizStep({ quiz, questionIndex }: Props) {
   const createOneArrayOfQuestion = () => {
-    const arrayAnswer = [...quiz.incorrect_answers, quiz.correct_answer];
-    const shuffledArray = arrayAnswer.sort(() => 0.5 - Math.random());
-    return shuffledArray;
+    if (quiz) {
+      const arrayAnswer = [...quiz.incorrect_answers, quiz.correct_answer];
+      const shuffledArray = arrayAnswer.sort(() => 0.5 - Math.random());
+      return shuffledArray;
+    }
+    return [];
   };
 
-  const handleSetAnser = (answer: string) => {
+  const homeStore = useAppSelector(homescreenStore);
+  const dispatch = useAppDispatch();
+
+  const handleSetAnswer = (answer: string) => {
     console.log(answer);
+  };
+
+  const handleSetupResponse = () => {
+    dispatch(setIncrementQuestionStep(questionIndex + 1));
   };
 
   return (
     <Card sx={{ minWidth: 275, maxWidth: 500 }}>
       <CardContent>
         <FormControl>
-          <FormLabel id="radio-buttons-group-label">{decodeHTML(quiz.question)}</FormLabel>
+          <FormLabel id="radio-buttons-group-label">{quiz ? decodeHTML(quiz.question) : ''}</FormLabel>
           <RadioGroup aria-labelledby="radio-buttons-group-label" defaultValue="female" name="radio-buttons-group">
             {createOneArrayOfQuestion().map((question, index) => (
               <FormControlLabel
                 value={question}
                 control={<Radio />}
                 key={index}
-                onClick={() => handleSetAnser(question)}
+                onClick={() => handleSetAnswer(question)}
                 label={decodeHTML(question)}
               />
             ))}
@@ -44,7 +58,7 @@ export function QuizStep({ quiz }: Props) {
         </FormControl>
       </CardContent>
       <CardActions>
-        <Button>Ответить</Button>
+        <Button onClick={handleSetupResponse}>Ответить</Button>
       </CardActions>
     </Card>
   );

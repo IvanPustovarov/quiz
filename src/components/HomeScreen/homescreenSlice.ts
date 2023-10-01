@@ -10,6 +10,7 @@ interface filtersState {
   // questions: AnswerResult[];
   categories: CategoryAnswer[];
   isScreenShowed: boolean;
+  userStep: number;
 }
 
 const initialState: filtersState = {
@@ -19,6 +20,7 @@ const initialState: filtersState = {
   // questions: [],
   categories: [],
   isScreenShowed: true,
+  userStep: 0,
 };
 
 export const homescreenSlice = createSlice({
@@ -43,9 +45,12 @@ export const homescreenSlice = createSlice({
     setScreenShowed: (state, action: PayloadAction<boolean>) => {
       state.isScreenShowed = action.payload;
     },
+    setIncrementQuestionStep: (state, action: PayloadAction<number>) => {
+      state.userStep = action.payload;
+    },
   },
 });
 
-export const { setCategory, setDifficalty, setQuestionCount, setScreenShowed } = homescreenSlice.actions;
+export const { setCategory, setDifficalty, setQuestionCount, setScreenShowed, setIncrementQuestionStep } = homescreenSlice.actions;
 
 export const homescreenStore = (state: RootState) => state.homescreen;
