@@ -1,3 +1,4 @@
+import { useState, ChangeEvent, useMemo } from 'react';
 import { AnswerResult } from './quizStep.types';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -10,7 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
 import decodeHTML from '~/utils/decoderHTML';
 import { Button } from '@mui/material';
 
-import { homescreenStore, setIncrementQuestionStep, setScreenShowed } from '../HomeScreen/homescreenSlice';
+import { UserAnswer, homescreenStore, setIncrementQuestionStep, setScreenShowed, addUserAnswer } from '../HomeScreen/homescreenSlice';
 import { useAppSelector, useAppDispatch } from '~/app/hooks';
 
 type Props = {
@@ -19,6 +20,8 @@ type Props = {
 };
 
 export function QuizStep({ quiz, questionIndex }: Props) {
+  const [userTemporaryAnswer, setUserTemporaryAnswer] = useState<string>('');
+
   const createOneArrayOfQuestion = () => {
     if (quiz) {
       const arrayAnswer = [...quiz.incorrect_answers, quiz.correct_answer];
@@ -28,15 +31,21 @@ export function QuizStep({ quiz, questionIndex }: Props) {
     return [];
   };
 
+  const createOneArrayOfQuestionMemo = useMemo(() => createOneArrayOfQuestion(), []);
+
   const homeStore = useAppSelector(homescreenStore);
   const dispatch = useAppDispatch();
 
-  const handleSetAnswer = (answer: string) => {
-    console.log(answer);
+  const handleChangeAnswer = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserTemporaryAnswer((event.target as HTMLInputElement).value);
   };
 
   const handleSetupResponse = () => {
-    dispatch(setIncrementQuestionStep(questionIndex + 1));
+    if (quiz) {
+      const result: UserAnswer = { correct: quiz.correct_answer, userAnswer: userTemporaryAnswer };
+      dispatch(addUserAnswer(result));
+      dispatch(setIncrementQuestionStep(questionIndex + 1));
+    }
 
     if (homeStore.questionCount && homeStore.userStep === homeStore.questionCount - 1) {
       dispatch(setScreenShowed('finish'));
@@ -55,15 +64,14 @@ export function QuizStep({ quiz, questionIndex }: Props) {
       <CardContent>
         <FormControl>
           <FormLabel id="radio-buttons-group-label">{quiz ? decodeHTML(quiz.question) : ''}</FormLabel>
-          <RadioGroup aria-labelledby="radio-buttons-group-label" defaultValue="female" name="radio-buttons-group">
-            {createOneArrayOfQuestion().map((question, index) => (
-              <FormControlLabel
-                value={question}
-                control={<Radio />}
-                key={index}
-                onClick={() => handleSetAnswer(question)}
-                label={decodeHTML(question)}
-              />
+          <RadioGroup
+            aria-labelledby="radio-buttons-group-label"
+            name="radio-buttons-group"
+            value={userTemporaryAnswer}
+            onChange={handleChangeAnswer}
+          >
+            {createOneArrayOfQuestionMemo.map((question, index) => (
+              <FormControlLabel value={question} control={<Radio />} key={index} label={decodeHTML(question)} />
             ))}
           </RadioGroup>
         </FormControl>

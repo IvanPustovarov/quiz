@@ -7,11 +7,16 @@ interface filtersState {
   questionCount?: number;
   category?: string;
   difficalty?: AnswerResult['difficulty'] | '';
-  // questions: AnswerResult[];
   categories: CategoryAnswer[];
   isScreenShowed: ScreenState;
   userStep: number;
+  correctUsersAnswers: UserAnswer[];
 }
+
+export type UserAnswer = {
+  correct: string;
+  userAnswer: string;
+};
 
 type ScreenState = 'start' | 'process' | 'finish';
 
@@ -19,10 +24,10 @@ const initialState: filtersState = {
   questionCount: undefined,
   category: undefined,
   difficalty: '',
-  // questions: [],
   categories: [],
   isScreenShowed: 'start',
   userStep: 0,
+  correctUsersAnswers: [],
 };
 
 export const homescreenSlice = createSlice({
@@ -41,12 +46,10 @@ export const homescreenSlice = createSlice({
       state.difficalty = '';
       state.questionCount = 0;
     },
-    // setQuestionArray: (state, action: PayloadAction<AnswerResult[]>) => {
-    //   for (let index = 0; index < action.payload.length; index++) {
-    //     const element = action.payload[index];
-    //     state.questions.push(element);
-    //   }
-    // },
+    addUserAnswer: (state, action: PayloadAction<UserAnswer>) => {
+      state.correctUsersAnswers = [...state.correctUsersAnswers, action.payload];
+      console.log(state.correctUsersAnswers);
+    },
     setQuestionCount: (state, action: PayloadAction<number>) => {
       state.questionCount = action.payload;
     },
@@ -56,10 +59,22 @@ export const homescreenSlice = createSlice({
     setIncrementQuestionStep: (state, action: PayloadAction<number>) => {
       state.userStep = action.payload;
     },
+    resetUserAnswer: (state) => {
+      state.correctUsersAnswers = [];
+      setResetQuestionsParams();
+    },
   },
 });
 
-export const { setCategory, setDifficalty, setQuestionCount, setScreenShowed, setIncrementQuestionStep, setResetQuestionsParams } =
-  homescreenSlice.actions;
+export const {
+  setCategory,
+  setDifficalty,
+  setQuestionCount,
+  setScreenShowed,
+  setIncrementQuestionStep,
+  setResetQuestionsParams,
+  addUserAnswer,
+  resetUserAnswer,
+} = homescreenSlice.actions;
 
 export const homescreenStore = (state: RootState) => state.homescreen;

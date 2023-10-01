@@ -1,14 +1,16 @@
 import { Button } from '@mui/material';
-import { setScreenShowed, setResetQuestionsParams } from '../HomeScreen/homescreenSlice';
-import { useAppDispatch } from '~/app/hooks';
+import { setScreenShowed, resetUserAnswer, homescreenStore } from '../HomeScreen/homescreenSlice';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
 
 export function FinishScreen() {
   const dispatch = useAppDispatch();
+  const homeStore = useAppSelector(homescreenStore);
 
   const handleGoToStart = () => {
+    dispatch(resetUserAnswer());
     dispatch(setScreenShowed('start'));
-    dispatch(setResetQuestionsParams());
-    // TODO: обнулить состояния вопросов.
+
+    console.log(homeStore);
   };
 
   return (
