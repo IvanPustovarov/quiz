@@ -6,10 +6,10 @@
   "homepage": "http://IvanPustovarov.github.io/quiz",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.conf.ts",
-    "build": "npm cache clean && cross-env NODE_ENV=production webpack --config config/webpack.prod.conf.ts",
+    "build": "npm cache verify && cross-env NODE_ENV=production webpack --config config/webpack.prod.conf.ts",
     "analyzer": "cross-env ANALYZER=true webpack --config config/webpack.prod.conf.ts",
     "clean": "rimraf ./dist",
-    "prebuild": "npm cache clean",
+    "prebuild": "npm cache verify",
     "predeploy" : "npm run build",
     "deploy" : "gh-pages -d build",
     "lint": "eslint . --fix --ext .ts,.tsx,.js",
