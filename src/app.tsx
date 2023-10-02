@@ -6,15 +6,10 @@ import { homescreenStore } from './components/HomeScreen/homescreenSlice';
 import { FinishScreen } from './components/FinishScreen/FinishScreen';
 
 const App = () => {
-  const { classes, cx } = useStyles();
-  const isActive = false;
+  const { classes } = useStyles();
   const homeStore = useAppSelector(homescreenStore);
   return (
-    <div
-      className={cx(classes.root, {
-        [classes.active]: isActive,
-      })}
-    >
+    <div className={classes.root}>
       {homeStore.isScreenShowed === 'start' ? (
         <HomeScreen />
       ) : homeStore.isScreenShowed === 'process' ? (

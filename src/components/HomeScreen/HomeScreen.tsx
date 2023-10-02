@@ -48,11 +48,11 @@ export function HomeScreen() {
   };
 
   return (
-    <div className="home-container">
-      <h1>Здравствуй!</h1>
-      <p>Предлагаю насладится тестам из нескольких вариантов ответа на выбранные или случайные темы</p>
-      <p>Ниже можно задать параметры</p>
-      <p>Если не задать параметры, то вопросы будут созданы по умолчанию</p>
+    <div className={classes.root}>
+      <h1>Добро пожаловать!</h1>
+      <p className={classes.paragraph}>
+        Предлагаю насладится тестами из нескольких вариантов ответа на выбранную тему. <br /> Ниже можно задать параметры.
+      </p>
 
       <SharedSelect handleSelectOption={handleSelectCategory} label="Категория" options={categoryResult.data?.trivia_categories} />
       <SharedSelect handleSelectOption={handleSelectDifficalty} label="Сложность" options={difficaltySelectRus} />

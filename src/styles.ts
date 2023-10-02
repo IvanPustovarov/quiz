@@ -1,7 +1,12 @@
 import { makeStyles } from 'tss-react/mui';
 
 export const useStyles = makeStyles()(() => ({
-  root: {},
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   wrapper: {
     color: 'white',
   },

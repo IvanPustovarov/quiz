@@ -5,9 +5,7 @@ export const useStyles = makeStyles()(() => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  paragraph: {
-    maxWidth: 400,
-    textAlign: 'center',
+    gap: 20,
+    fontSize: 20,
   },
 }));

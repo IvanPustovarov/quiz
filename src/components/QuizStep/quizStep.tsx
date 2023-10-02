@@ -67,6 +67,11 @@ export function QuizStep({ quiz, questionIndex }: Props) {
     return 'Ответить';
   };
 
+  const isButtonAvaliable = () => {
+    if (userTemporaryAnswer) return false;
+    else return true;
+  };
+
   return (
     <Card sx={{ minWidth: 275, maxWidth: 500 }}>
       <CardContent>
@@ -85,7 +90,9 @@ export function QuizStep({ quiz, questionIndex }: Props) {
         </FormControl>
       </CardContent>
       <CardActions>
-        <Button onClick={handleSetupResponse}>{returnButtonNextText()}</Button>
+        <Button disabled={isButtonAvaliable()} variant="contained" onClick={handleSetupResponse}>
+          {returnButtonNextText()}
+        </Button>
       </CardActions>
     </Card>
   );
