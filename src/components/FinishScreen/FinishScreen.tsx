@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 
 export function FinishScreen() {
   const dispatch = useAppDispatch();
-  const homeStore = useAppSelector(homescreenStore);
+  const selectHomeStore = useAppSelector(homescreenStore);
   const { classes } = useStyles();
 
   const handleGoToStart = () => {
@@ -16,7 +16,7 @@ export function FinishScreen() {
   return (
     <div className={classes.root}>
       <div>Тест пройден!</div>
-      <div>Ваш счёт: {homeStore.userScore}</div>
+      <div>Ваш счёт: {selectHomeStore.userScore}</div>
       <Button variant="contained" onClick={handleGoToStart}>
         Заново
       </Button>

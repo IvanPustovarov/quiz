@@ -7,14 +7,14 @@ import { FinishScreen } from './components/FinishScreen/FinishScreen';
 
 const App = () => {
   const { classes } = useStyles();
-  const homeStore = useAppSelector(homescreenStore);
+  const selectHomeStore = useAppSelector(homescreenStore);
   return (
     <div className={classes.root}>
-      {homeStore.isScreenShowed === 'start' ? (
+      {selectHomeStore.isScreenShowed === 'start' ? (
         <HomeScreen />
-      ) : homeStore.isScreenShowed === 'process' ? (
+      ) : selectHomeStore.isScreenShowed === 'process' ? (
         <StepContainer />
-      ) : homeStore.isScreenShowed === 'finish' ? (
+      ) : selectHomeStore.isScreenShowed === 'finish' ? (
         <FinishScreen />
       ) : null}
     </div>

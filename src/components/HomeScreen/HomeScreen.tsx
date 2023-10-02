@@ -15,7 +15,7 @@ export type Option = SelectUnionOption | SelectOptions;
 export function HomeScreen() {
   const categoryResult = useGetCategoryQuery('');
   const dispatch = useAppDispatch();
-  const homeStore = useAppSelector(homescreenStore);
+  const selectHomeStore = useAppSelector(homescreenStore);
 
   const { classes } = useStyles();
 
@@ -43,7 +43,7 @@ export function HomeScreen() {
   };
 
   const isButtonAvaliable = () => {
-    if (homeStore.category && homeStore.difficalty && homeStore.questionCount) return false;
+    if (selectHomeStore.category && selectHomeStore.difficalty && selectHomeStore.questionCount) return false;
     else return true;
   };
 

@@ -40,7 +40,7 @@ export function QuizStep({ quiz, questionIndex }: Props) {
 
   const createOneArrayOfQuestionMemo = useMemo(() => createOneArrayOfQuestion(), []);
 
-  const homeStore = useAppSelector(homescreenStore);
+  const selectHomeStore = useAppSelector(homescreenStore);
   const dispatch = useAppDispatch();
 
   const handleChangeAnswer = (event: ChangeEvent<HTMLInputElement>) => {
@@ -54,14 +54,14 @@ export function QuizStep({ quiz, questionIndex }: Props) {
       dispatch(setIncrementQuestionStep(questionIndex + 1));
     }
 
-    if (homeStore.questionCount && homeStore.userStep === homeStore.questionCount - 1) {
+    if (selectHomeStore.questionCount && selectHomeStore.userStep === selectHomeStore.questionCount - 1) {
       dispatch(setScreenShowed('finish'));
       dispatch(calculateUserScore());
     }
   };
 
   const returnButtonNextText = () => {
-    if (homeStore.questionCount && questionIndex + 1 > homeStore.questionCount - 1) {
+    if (selectHomeStore.questionCount && questionIndex + 1 > selectHomeStore.questionCount - 1) {
       return 'Завершить';
     }
     return 'Ответить';

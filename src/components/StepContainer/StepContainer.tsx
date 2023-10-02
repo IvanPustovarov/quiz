@@ -8,13 +8,13 @@ import { LoadingComponent } from '../loadingComponent/loadingComponent';
 
 export function StepContainer() {
   const { classes } = useStyles();
-  const homeStore = useAppSelector(homescreenStore);
+  const selectHomeStore = useAppSelector(homescreenStore);
   const dispatch = useAppDispatch();
 
   const { data, isLoading } = useGetQuestionByParamsQuery({
-    amount: homeStore.questionCount?.toString(),
-    difficulty: homeStore.difficalty,
-    category: homeStore.category,
+    amount: selectHomeStore.questionCount?.toString(),
+    difficulty: selectHomeStore.difficalty,
+    category: selectHomeStore.category,
   });
 
   const handleTryAgain = () => {
@@ -22,7 +22,7 @@ export function StepContainer() {
   };
 
   const QuestionToRender = () => {
-    const question = data?.results[homeStore.userStep];
+    const question = data?.results[selectHomeStore.userStep];
     return question;
   };
 
@@ -41,7 +41,7 @@ export function StepContainer() {
     <>
       {QuestionToRender() ? (
         <div className={classes.root}>
-          {<QuizStep questionIndex={homeStore.userStep} key={QuestionToRender()?.correct_answer} quiz={QuestionToRender()} />}
+          {<QuizStep questionIndex={selectHomeStore.userStep} key={QuestionToRender()?.correct_answer} quiz={QuestionToRender()} />}
         </div>
       ) : null}
     </>
