@@ -9,13 +9,12 @@ export function FinishScreen() {
   const handleGoToStart = () => {
     dispatch(resetUserAnswer());
     dispatch(setScreenShowed('start'));
-
-    console.log(homeStore);
   };
 
   return (
     <>
       <div>Finish!</div>
+      <div>Your score: {homeStore.userScore}</div>
       <Button onClick={handleGoToStart}>Заново</Button>
     </>
   );

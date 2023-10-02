@@ -11,6 +11,7 @@ interface filtersState {
   isScreenShowed: ScreenState;
   userStep: number;
   correctUsersAnswers: UserAnswer[];
+  userScore: number;
 }
 
 export type UserAnswer = {
@@ -27,6 +28,7 @@ const initialState: filtersState = {
   categories: [],
   isScreenShowed: 'start',
   userStep: 0,
+  userScore: 0,
   correctUsersAnswers: [],
 };
 
@@ -48,7 +50,6 @@ export const homescreenSlice = createSlice({
     },
     addUserAnswer: (state, action: PayloadAction<UserAnswer>) => {
       state.correctUsersAnswers = [...state.correctUsersAnswers, action.payload];
-      console.log(state.correctUsersAnswers);
     },
     setQuestionCount: (state, action: PayloadAction<number>) => {
       state.questionCount = action.payload;
@@ -61,7 +62,20 @@ export const homescreenSlice = createSlice({
     },
     resetUserAnswer: (state) => {
       state.correctUsersAnswers = [];
-      setResetQuestionsParams();
+      state.category = '';
+      state.isScreenShowed = 'start';
+      state.difficalty = '';
+      state.questionCount = 0;
+      state.userStep = 0;
+      state.userScore = 0;
+    },
+    calculateUserScore: (state) => {
+      for (let index = 0; index < state.correctUsersAnswers.length; index++) {
+        const element = state.correctUsersAnswers[index];
+        if (element.userAnswer === element.correct) {
+          state.userScore = state.userScore + 1;
+        }
+      }
     },
   },
 });
@@ -75,6 +89,7 @@ export const {
   setResetQuestionsParams,
   addUserAnswer,
   resetUserAnswer,
+  calculateUserScore,
 } = homescreenSlice.actions;
 
 export const homescreenStore = (state: RootState) => state.homescreen;

@@ -11,7 +11,14 @@ import FormLabel from '@mui/material/FormLabel';
 import decodeHTML from '~/utils/decoderHTML';
 import { Button } from '@mui/material';
 
-import { UserAnswer, homescreenStore, setIncrementQuestionStep, setScreenShowed, addUserAnswer } from '../HomeScreen/homescreenSlice';
+import {
+  UserAnswer,
+  homescreenStore,
+  setIncrementQuestionStep,
+  setScreenShowed,
+  addUserAnswer,
+  calculateUserScore,
+} from '../HomeScreen/homescreenSlice';
 import { useAppSelector, useAppDispatch } from '~/app/hooks';
 
 type Props = {
@@ -49,6 +56,7 @@ export function QuizStep({ quiz, questionIndex }: Props) {
 
     if (homeStore.questionCount && homeStore.userStep === homeStore.questionCount - 1) {
       dispatch(setScreenShowed('finish'));
+      dispatch(calculateUserScore());
     }
   };
 
