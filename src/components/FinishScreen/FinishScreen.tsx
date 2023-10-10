@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { setScreenShowed, resetUserAnswer, homescreenStore } from '../HomeScreen/homescreenSlice';
+import { setScreenShowed, resetUserAnswer, homescreenStore } from '../../store/homescreenSlice';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { useStyles } from './styles';
 

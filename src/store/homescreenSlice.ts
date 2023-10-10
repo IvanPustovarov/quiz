@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '~/app/store';
-import { AnswerResult, CategoryAnswer } from '../QuizStep/quizStep.types';
+import { AnswerResult, CategoryAnswer } from '../components/QuizStep/quizStep.types';
 
 interface filtersState {
   questionCount?: number;

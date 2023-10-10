@@ -1,6 +1,6 @@
 import { useGetCategoryQuery } from '~/api/api';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
-import { homescreenStore } from '~/components/HomeScreen/homescreenSlice';
+import { homescreenStore } from '~/store/homescreenSlice';
 
 import { Button, Slider, Box } from '@mui/material';
 import { useStyles } from './styles';
@@ -8,7 +8,7 @@ import { useStyles } from './styles';
 import SharedSelect from '../SharedSelect/SharedSelect';
 import { SelectOptions, SelectUnionOption, difficultySelect } from '../SharedSelect/mockSelectData';
 
-import { setCategory, setDifficalty, setQuestionCount, setScreenShowed } from './homescreenSlice';
+import { setCategory, setDifficalty, setQuestionCount, setScreenShowed } from '../../store/homescreenSlice';
 
 export type Option = SelectUnionOption | SelectOptions;
 

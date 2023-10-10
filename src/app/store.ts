@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { quizApi } from '~/api/api';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { homescreenSlice } from '~/components/HomeScreen/homescreenSlice';
+import { homescreenSlice } from '~/store/homescreenSlice';
 
 export const store = configureStore({
   reducer: {

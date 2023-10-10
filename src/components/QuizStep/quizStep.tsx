@@ -18,7 +18,7 @@ import {
   setScreenShowed,
   addUserAnswer,
   calculateUserScore,
-} from '../HomeScreen/homescreenSlice';
+} from '../../store/homescreenSlice';
 import { useAppSelector, useAppDispatch } from '~/app/hooks';
 
 type Props = {
