@@ -31,10 +31,10 @@ export function StepContainer() {
   }
   if (data?.results.length === 0) {
     return (
-      <div>
-        <p>Похоже, что вопросы не загрузились. Попробуйте снова</p>
+      <Box>
+        <Box component="p"> Похоже, что вопросы не загрузились. Попробуйте снова</Box>
         <Button onClick={handleTryAgain}>Попробовать снова</Button>
-      </div>
+      </Box>
     );
   }
   if (!QuestionToRender()) {
