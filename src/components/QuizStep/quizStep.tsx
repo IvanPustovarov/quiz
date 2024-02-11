@@ -30,12 +30,10 @@ export function QuizStep({ quiz, questionIndex }: Props) {
   const [userTemporaryAnswer, setUserTemporaryAnswer] = useState<string>('');
 
   const createOneArrayOfQuestion = () => {
-    if (quiz) {
-      const arrayAnswer = [...quiz.incorrect_answers, quiz.correct_answer];
-      const shuffledArray = arrayAnswer.sort(() => 0.5 - Math.random());
-      return shuffledArray;
-    }
-    return [];
+    if (!quiz) return [];
+    const arrayAnswer = [...quiz.incorrect_answers, quiz.correct_answer];
+    const shuffledArray = arrayAnswer.sort(() => 0.5 - Math.random());
+    return shuffledArray;
   };
 
   const createOneArrayOfQuestionMemo = useMemo(() => createOneArrayOfQuestion(), []);
@@ -69,7 +67,6 @@ export function QuizStep({ quiz, questionIndex }: Props) {
 
   const isButtonAvaliable = () => {
     if (userTemporaryAnswer) return false;
-    else return true;
   };
 
   return (

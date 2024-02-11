@@ -1,11 +1,18 @@
 import { QuestionDifficulty } from '../QuizStep/quizStep.types';
 
-export type QuestionDifficultyRus = 'легко' | 'средне' | 'тяжело';
+const EASY_RU = 'легко';
+const MEDIUM_RU = 'средне';
+const HARD_RU = 'тяжело';
+const EASY = 'easy';
+const MEDIUM = 'medium';
+const HARD = 'hard';
+
+export type QuestionDifficultyRus = typeof EASY_RU | typeof MEDIUM_RU | typeof HARD_RU;
 
 export const rusDifficulties: Record<QuestionDifficulty, QuestionDifficultyRus> = {
-  easy: 'легко',
-  medium: 'средне',
-  hard: 'тяжело',
+  easy: EASY_RU,
+  medium: MEDIUM_RU,
+  hard: HARD_RU,
 };
 
 export interface SelectOptions {
@@ -24,17 +31,17 @@ interface DifficultyType {
 export const difficultySelect: DifficultyType[] = [
   {
     id: 1,
-    name: 'easy',
-    rusName: 'легко',
+    name: EASY,
+    rusName: EASY_RU,
   },
   {
     id: 2,
-    name: 'medium',
-    rusName: 'средне',
+    name: MEDIUM,
+    rusName: MEDIUM_RU,
   },
   {
     id: 3,
-    name: 'hard',
-    rusName: 'тяжело',
+    name: HARD,
+    rusName: HARD_RU,
   },
 ];

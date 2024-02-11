@@ -21,7 +21,9 @@ export function HomeScreen() {
 
   const handleSelectCategory = (option: Option) => {
     const findIdCategory = categoryResult.data?.trivia_categories.find((item) => item.name === option.name);
-    if (findIdCategory?.id) dispatch(setCategory(findIdCategory.id));
+    if (findIdCategory?.id) {
+      dispatch(setCategory(findIdCategory.id));
+    }
   };
 
   const difficaltySelectRus = difficultySelect.map(({ rusName, id }) => ({ name: rusName, id }));
