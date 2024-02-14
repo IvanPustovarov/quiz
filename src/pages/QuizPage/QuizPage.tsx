@@ -1,12 +1,13 @@
-import { QuizStep } from '../QuizStep/quizStep';
+import { QuizStep } from '../../components/QuizStep/quizStep';
 import { useGetQuestionByParamsQuery } from '~/api/api';
 import { useStyles } from './styles';
 import { useAppSelector, useAppDispatch } from '~/app/hooks';
 import { homescreenStore, setResetQuestionsParams } from '../../store/homescreenSlice';
 import { Box, Button } from '@mui/material';
-import { LoadingComponent } from '../loadingComponent/loadingComponent';
+import { LoadingComponent } from '../../components/loadingComponent/loadingComponent';
+import { AnswerResult } from '../../components/QuizStep/quizStep.types';
 
-export function StepContainer() {
+export default function QuizPage() {
   const { classes } = useStyles();
   const selectHomeStore = useAppSelector(homescreenStore);
   const dispatch = useAppDispatch();
@@ -21,8 +22,9 @@ export function StepContainer() {
     dispatch(setResetQuestionsParams());
   };
 
-  const QuestionToRender = () => {
-    const question = data?.results[selectHomeStore.userStep];
+  const QuestionToRender = (): AnswerResult | undefined => {
+    if (!data) return;
+    const question = data.results[selectHomeStore.userStep];
     return question;
   };
 

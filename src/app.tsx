@@ -1,9 +1,9 @@
 import { useStyles } from './styles';
-import { HomeScreen } from './components/HomeScreen/HomeScreen';
-import { StepContainer } from './components/StepContainer/StepContainer';
+import QuizPage from './pages/QuizPage/QuizPage';
 import { useAppSelector } from '~/app/hooks';
 import { homescreenStore } from './store/homescreenSlice';
-import { FinishScreen } from './components/FinishScreen/FinishScreen';
+import FinishPage from './pages/FinishScreen/FinishPage';
+import HomePage from './pages/HomePage/HomePage';
 
 const App = () => {
   const { classes } = useStyles();
@@ -11,11 +11,11 @@ const App = () => {
   return (
     <div className={classes.root}>
       {selectHomeStore.isScreenShowed === 'start' ? (
-        <HomeScreen />
+        <HomePage />
       ) : selectHomeStore.isScreenShowed === 'process' ? (
-        <StepContainer />
+        <QuizPage />
       ) : selectHomeStore.isScreenShowed === 'finish' ? (
-        <FinishScreen />
+        <FinishPage />
       ) : null}
     </div>
   );

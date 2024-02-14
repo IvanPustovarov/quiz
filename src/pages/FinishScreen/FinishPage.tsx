@@ -1,9 +1,9 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { setScreenShowed, resetUserAnswer, homescreenStore } from '../../store/homescreenSlice';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { useStyles } from './styles';
 
-export function FinishScreen() {
+export default function FinishPage() {
   const dispatch = useAppDispatch();
   const selectHomeStore = useAppSelector(homescreenStore);
   const { classes } = useStyles();
@@ -14,12 +14,12 @@ export function FinishScreen() {
   };
 
   return (
-    <div className={classes.root}>
-      <div>Тест пройден!</div>
-      <div>Ваш счёт: {selectHomeStore.userScore}</div>
+    <Box className={classes.root}>
+      <Box>Тест пройден!</Box>
+      <Box>Ваш счёт: {selectHomeStore.userScore}</Box>
       <Button variant="contained" onClick={handleGoToStart}>
         Заново
       </Button>
-    </div>
+    </Box>
   );
 }
